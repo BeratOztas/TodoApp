@@ -33,27 +33,34 @@ router.post("/", async (req: any, res: any) => {
 router.put("/:id", async (req: any, res: any) => {
     try {
         const { title, completed } = req.body;
-        if (!title || title.trim() === "") {
-            return res.status(400).json({ message: "Todo Boş olamaz" });
+        const todoId = req.params.id;
+
+        // ID'nin geçerli olup olmadığını kontrol et
+        if (!mongoose.Types.ObjectId.isValid(todoId)) {
+            return res.status(400).json({ message: "Geçersiz ID formatı!" });
         }
-        const todoId = new mongoose.Types.ObjectId(req.params.id);
-        const isTodoExist = await Todo.findById(req.params.id);
-        console.log(isTodoExist); // Burada konsola yazdırarak sonucu kontrol edebilirsiniz.
+
+        const isTodoExist = await Todo.findById(todoId);
         if (!isTodoExist) {
-            return res.status(404).json({ message: "Güncellenecek Todo Bulunamadı !" });
+            return res.status(404).json({ message: "Güncellenecek Todo Bulunamadı!" });
         }
-        //findByIdAndUpdate save() yapmamıza gerek yok
-        //Otamatik olarak db'de kendisi günceller.
-        const updatedTodo = await Todo.findByIdAndUpdate(
-            req.params.id,
-            { title, completed },
-            { new: true }
-        );
-        res.status(201).json(updatedTodo);
+
+        // Güncellenecek alanları belirle
+        const updatedFields: any = {};
+        if (title !== undefined && title.trim() !== "") updatedFields.title = title;
+        if (completed !== undefined) updatedFields.completed = completed;
+
+        if (Object.keys(updatedFields).length === 0) {
+            return res.status(400).json({ message: "Güncellenecek bir alan belirtilmelidir!" });
+        }
+
+        const updatedTodo = await Todo.findByIdAndUpdate(todoId, updatedFields, { new: true });
+        res.status(200).json(updatedTodo);
     } catch (error) {
-        res.status(500).json({ message: "Güncelleme başarısız" });
+        console.error("Güncelleme hatası:", error);
+        res.status(500).json({ message: "Güncelleme başarısız!" });
     }
-})
+});
 
 
 //Delete Done Tasks(Tamamlanmış Todoları sil)

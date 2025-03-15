@@ -2,14 +2,13 @@ import mongoose from "mongoose";
 
 //Todo Schema
 const todoSchema= new mongoose.Schema({
-    title :{type:String, required :true}, // Zorunlu
-    completed:{type:Boolean, default :false}, //todo Default olarak false
-    createdAt :{type:Date ,default:Date.now} //Oluşturulma tarihi
+    title :{type:String, required :true}, // Required
+    completed:{type:Boolean, default :false}, //Default false
+    createdAt :{type:Date ,default:Date.now} //Created Time
 });
 
-
-// Modeli oluştur
+// Create Model
 const Todo =mongoose.model("Todo",todoSchema);
 
-//export et
+//export 
 export default Todo;

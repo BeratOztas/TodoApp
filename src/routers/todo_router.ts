@@ -2,15 +2,14 @@ import express from "express";
 import Todo from "../models/todo";
 import mongoose from "mongoose";
 const router = express.Router();
-
+///todos?completed
 //Get (Get Todos)
 router.get("/", async (req: any, res: any) => {
     try {
         //Query Completed
         const { completed } = req.query;
-        let query: any = {};
-        if (completed === "true") query.completed = true;
-        if (completed === "false") query.completed = false;
+        const query: { completed?: boolean } = {};
+        if (completed) query.completed = completed;
         const todos = await Todo.find(query);
         res.json(todos);
     } catch (error) {
@@ -78,7 +77,7 @@ router.delete("/completed", async (req: any, res: any) => {
             return res.status(404).json({ message: "Tamamlanmış todo bulunamadı.!" });
         }
         res.status(204).json({
-            message: "Tamamlanmış tüm todolar başarıyla silindi!",
+            message: `Tamamlanmış todolar (${deletedTodos.deletedCount}) başarıyla silindi.`,
             deletedCount: deletedTodos.deletedCount
         })
 
@@ -100,7 +99,6 @@ router.delete("/all", async (req: any, res: any) => {
         res.status(500).json({ message: "Tüm todoları silme başarısız!" });
     }
 });
-
 //Delete Todo By Id
 router.delete("/:id", async (req: any, res: any) => {
     try {

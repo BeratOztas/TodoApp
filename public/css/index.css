@@ -1,0 +1,86 @@
+.header {
+    background-color: #130ff3;
+    /* Arka plan rengini buradan değiştirebilirsiniz */
+    color: white;
+    /* Yazı rengi */
+    text-align: center;
+    /* Yazıyı ortalar */
+    margin-top: 30px;
+    /* Üstten boşluk */
+    padding: 20px 0;
+    /* Üst ve alt padding */
+    display: flex;
+    justify-content: center;
+    /* İçeriği yatayda ortalar */
+}
+
+.footer {
+    background-color: #130ff3;
+    /* Arka plan rengini buradan değiştirebilirsiniz */
+    color: white;
+    /* Yazı rengi */
+    text-align: center;
+    /* Yazıyı ortalar */
+    margin-top: 100px;
+    /* Üstten boşluk */
+    padding: 20px 0;
+    /* Üst ve alt padding */
+    display: flex;
+    justify-content: center;
+    /* İçeriği yatayda ortalar */
+}
+
+.card-header,
+.card-body,
+.card-title,
+form {
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+ul li span {
+    flex: 1;
+    text-align: left;
+}
+
+ul li button {
+    margin-left: 10px;
+    width: 50px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.displayButtons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.display-btn{
+    width: 200px;
+}
+.deleteButtons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.delete-done-all-btn {
+    width: 500px;
+    height: 40px;
+    font-size: 16px;
+}

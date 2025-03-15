@@ -1,0 +1,52 @@
+<%- include('header') %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/index.css">
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="card w-100 mt-3">
+                <div class="card-header">
+                    <h4 class="card-title">Todo Input</h4>
+                </div>
+                </hr>
+                <div class="card-body">
+                    <form id="todo-form" class="mt-2">
+                        <input type="text" class="form-control mt-2 " id="todoText" required aria-describedby="todo"
+                            placeholder="New Todo...">
+
+                        <button id="todoAddButton" style="width: 100%" type="submit"
+                            class="btn btn-primary mt-4 btn-primary">
+                            Add New Task</button>
+                    </form>
+                </div>
+                </hr>
+                <div class="card-body">
+                    <h4 class="card-title">Todo List</h4>
+                    <hr>
+                    <div class="displayButtons">
+                        <button id="display-all-tasks" class="btn btn-primary mt-4 btn-primary display-btn">All</button>
+                        <button id="display-done-tasks" class="btn btn-primary mt-4 btn-primary display-btn">Done</button>
+                        <button id="display-todo-tasks" class="btn btn-primary mt-4 btn-primary display-btn">Todo</button>
+                    </div>
+                    <hr>
+                    <div>
+                        <ul></ul>
+                    </div>
+                </div>
+                <hr>
+                <div class="card-body deleteButtons">
+                    <button id="delete-done-task" class="btn btn-danger mt-2 btn-primary delete-done-all-btn">Delete
+                        done tasks</button>
+                    <button id="delete-all-task" class="btn btn-danger mt-2 btn-primary delete-done-all-btn">Delete all
+                        tasks</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <!-- todo.js dosyasını dahil ediyoruz -->
+    <script src="/js/todo.js"></script>
+
+    <%- include('footer') %>

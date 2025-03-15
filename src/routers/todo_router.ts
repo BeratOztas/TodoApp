@@ -3,17 +3,22 @@ import Todo from "../models/todo";
 import mongoose from "mongoose";
 const router = express.Router();
 
-//Get (Tüm Todo'ları Getir)
+//Get (Get Todos)
 router.get("/", async (req: any, res: any) => {
     try {
-        const todos = await Todo.find();
+        //Query Completed
+        const { completed } = req.query;
+        let query :any= {};
+        if (completed === "true") query.completed = true;
+        if (completed === "false") query.completed = false;
+        const todos = await Todo.find(query);
         res.json(todos);
     } catch (error) {
         res.status(500).json({ message: "Sunucu Hatası Oluştu!" })
     }
 });
 
-//Post (Yeni Todo Ekle)
+//Post (Add New Todo)
 router.post("/", async (req: any, res: any) => {
     try {
         //Object Destructing yaparak direkt title'ı alıyoruz.
@@ -29,7 +34,7 @@ router.post("/", async (req: any, res: any) => {
         res.status(500).json({ message: "Todo Eklenemedi !" });
     }
 })
-//Put/Update (Todo Güncelle)
+//Put/Update (Update Todo)
 router.put("/:id", async (req: any, res: any) => {
     try {
         const { title, completed } = req.body;
@@ -63,7 +68,7 @@ router.put("/:id", async (req: any, res: any) => {
 });
 
 
-//Delete Done Tasks(Tamamlanmış Todoları sil)
+//Delete Done Tasks
 router.delete("/completed", async (req: any, res: any) => {
     try {
         //completed: true olan tüm todoları siliyoruz
@@ -82,7 +87,7 @@ router.delete("/completed", async (req: any, res: any) => {
     }
 })
 
-//Delete All Todo(Bütün Todo'ları Sil)
+//Delete All Todo
 router.delete("/all", async (req: any, res: any) => {
     try {
         const deletedTodos = await Todo.deleteMany({});
@@ -96,7 +101,7 @@ router.delete("/all", async (req: any, res: any) => {
     }
 });
 
-//Delete Todo (Bir Todo Sil)
+//Delete Todo By Id
 router.delete("/:id", async (req: any, res: any) => {
     try {
         const todoId = new mongoose.Types.ObjectId(req.params.id);

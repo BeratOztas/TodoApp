@@ -8,7 +8,7 @@ router.get("/", async (req: any, res: any) => {
     try {
         //Query Completed
         const { completed } = req.query;
-        let query :any= {};
+        let query: any = {};
         if (completed === "true") query.completed = true;
         if (completed === "false") query.completed = false;
         const todos = await Todo.find(query);
@@ -51,7 +51,7 @@ router.put("/:id", async (req: any, res: any) => {
         }
 
         // Güncellenecek alanları belirle
-        const updatedFields: any = {};
+        const updatedFields: { title?: string, completed?: boolean } = {};
         if (title !== undefined && title.trim() !== "") updatedFields.title = title;
         if (completed !== undefined) updatedFields.completed = completed;
 

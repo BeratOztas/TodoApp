@@ -4,7 +4,7 @@
 
 ## git clone https://github.com/BeratOztas/TodoApp
 
-[Sunum dosyası](./docs/NODEJSBOOTCAMPSUNUMU-BeratÖztaş.pdf)
+[Sunum dosyası](./NODEJSBOOTCAMPSUNUMU-BeratÖztaş.pdf)
 ### Npm Start
 > npm run dev:start (json-server olmadan)
 > json-server --watch db.json --port 3000 (Sadece json-server çalıştır)
